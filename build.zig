@@ -116,7 +116,7 @@ pub fn build(b: *std.Build) !void {
             "physics_world.c",
             "prismatic_joint.c",
             "recording.c",
-            "recording_replay.c",
+            "replay.c",
             "revolute_joint.c",
             "scheduler.c",
             "sensor.c",
@@ -132,6 +132,8 @@ pub fn build(b: *std.Build) !void {
             "types.c",
             "weld_joint.c",
             "wheel_joint.c",
+            "wide4.c",
+            "wide8.c",
             "world_snapshot.c",
         },
     });

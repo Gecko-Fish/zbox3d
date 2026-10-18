@@ -429,10 +429,6 @@ pub const World = extern struct {
         c.b3World_DumpMemoryStats(self.id);
     }
 
-    pub fn rebuildStaticTree(self: World) void {
-        c.b3World_RebuildStaticTree(self.id);
-    }
-
     pub fn createBody(self: World, def: *const BodyDef) Body {
         return .{ .id = c.b3CreateBody(self.id, def) };
     }
@@ -2050,11 +2046,11 @@ test "hello world" {
         world.step(time_step, sub_step_count);
     }
 
-    const target = .{ .x = -0.00567714, .y = 0.9999298, .z = 0.010617549 };
+    const target = .{ .x = -0.0056772507, .y = 0.99992967, .z = 0.0106176175 };
     const position_end = body.getPosition();
-    try std.testing.expectEqual(position_end.x, target.x);
-    try std.testing.expectEqual(position_end.y, target.y);
-    try std.testing.expectEqual(position_end.z, target.z);
+    try std.testing.expectEqual(target.x, position_end.x);
+    try std.testing.expectEqual(target.y, position_end.y);
+    try std.testing.expectEqual(target.z, position_end.z);
 }
 
 test "sphere falls onto ground box and comes to rest" {
