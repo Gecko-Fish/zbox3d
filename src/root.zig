@@ -1,8 +1,10 @@
 const std = @import("std");
 
-pub const c = @cImport({
-    @cInclude("box3d/box3d.h");
-});
+// pub const c = @cImport({
+//     @cInclude("box3d/box3d.h");
+// });
+
+pub const c = @import("cbox3d");
 
 pub const Vec2 = c.b3Vec2;
 pub const Vec3 = c.b3Vec3;

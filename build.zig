@@ -110,10 +110,12 @@ pub fn build(b: *std.Build) !void {
             "mesh_contact.c",
             "motor_joint.c",
             "mover.c",
+            "mover_joint.c",
             "name_cache.c",
             "parallel_for.c",
             "parallel_joint.c",
             "physics_world.c",
+            "pogo_joint.c",
             "prismatic_joint.c",
             "recording.c",
             "replay.c",
@@ -138,4 +140,24 @@ pub fn build(b: *std.Build) !void {
         },
     });
     mod.addIncludePath(upstream.path("include"));
+
+    // https://ziggit.dev/t/addtranslatec-for-system-headers/9976/2
+    const files = b.addWriteFiles();
+    const translate_header = files.add("lib/box3d/include/box3d/box3d.h",
+        \\#include "base.h"
+        \\#include "collision.h"
+        \\#include "id.h"
+        \\#include "math_functions.h"
+        \\#include "types.h"
+        \\
+        \\#include <stdbool.h>
+    );
+    const box3d_translate = b.addTranslateC(.{
+        .link_libc = true,
+        .target = target,
+        .optimize = optimize,
+        .root_source_file = translate_header,
+    });
+    box3d_translate.addIncludePath(upstream.path("include/box3d"));
+    mod.addImport("cbox3d", box3d_translate.createModule());
 }

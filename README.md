@@ -6,3 +6,7 @@ Zig-friendly bindings for [Box3D](https://github.com/erincatto/box3d)
 
 - https://github.com/Foundation42/box3d-zig
 - https://github.com/sluggga/zigbox3d
+
+## TODO
+- pogo_joint
+- mover_joint
